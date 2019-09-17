@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data class=".CommitItemBinding">
+    <data class=".StoryItemBinding">
 
         <variable
             name="item"
@@ -26,14 +26,14 @@
 
             <TextView
                 android:id="@+id/author"
-                style="@style/TextAppearance.AppCompat.Body1"
+                style="@style/TextAppearance.AppCompat.Caption"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:text="@{item.authorName}"
-                android:visible='@{item.authorName}'
+                app:showString='@{item.authorName}'
                 tools:text="Author name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +47,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 android:text="@{item.title}"
-                android:visible='@{item.title}'
+                app:showString='@{item.title}'
                 tools:text="Title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -55,14 +55,14 @@
 
             <TextView
                 android:id="@+id/url"
-                style="@style/TextAppearance.AppCompat.Body1"
+                style="@style/TextAppearance.AppCompat.Caption"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 android:text='@{item.url}'
-                android:visible='@{item.url}'
+                app:showString='@{item.url}'
                 tools:text="url"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -75,9 +75,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
-                android:paddingBottom="16dp"
                 android:text='@{item.text}'
-                android:visible='@{item.text}'
+                app:showString='@{item.text}'
                 android:lines="4"
                 tools:text="Body"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -90,11 +89,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
                 android:src="@drawable/ic_chat_bubble_outline_black_24dp"
-                android:visible='@{item.descendants}'
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/body"
+                app:layout_constraintBottom_toBottomOf="parent"
                 />
 
             <TextView
@@ -103,11 +103,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
-                android:text='@{item.descendants}'
-                android:visible='@{item.descendants}'
+                android:layout_marginStart="8dp"
+                android:text='@{item.descendants + ""}'
                 app:layout_constraintStart_toEndOf="@id/chat_bubble"
-                app:layout_constraintTop_toBottomOf="@id/body"
+                app:layout_constraintTop_toTopOf="@id/chat_bubble"
                 tools:text="8" />
 
 

@@ -24,17 +24,23 @@ class DataModule {
 
     @Singleton
     @Provides
-    fun provideOkHttpClient(cache: Cache, securityModifier: OkHttpSecurityModifier): OkHttpClient {
+    fun provideCache(app: Application): Cache {
+        val cacheDir = File(app.cacheDir, "http")
+        return Cache(cacheDir, DISK_CACHE_SIZE.toLong())
+    }
+
+    @Singleton
+    @Provides
+    fun provideOkHttpClient(cache: Cache): OkHttpClient {
         val builder = OkHttpClient.Builder()
         builder.cache(cache)
-        securityModifier.apply(builder)
         return builder.build()
     }
 
     @Singleton
     @Provides
     fun provideBaseUrl(settings: Settings): String {
-        return settings.baseUrl
+      return settings.baseUrl
     }
 
     @Singleton
@@ -71,4 +77,7 @@ class DataModule {
         api: HackerNewsApiService): HackerNewsInteractor {
         return HackerNewsInteractor(context, api)
     }
-}
+
+    companion object {
+        private const val DISK_CACHE_SIZE = 50 * 1024 * 1024 // 50MB
+    }}

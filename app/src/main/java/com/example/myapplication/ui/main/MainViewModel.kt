@@ -2,29 +2,20 @@ package com.example.myapplication.ui.main
 
 import android.app.Application
 import androidx.annotation.VisibleForTesting
+import androidx.databinding.Bindable
 import androidx.databinding.Observable
 import androidx.lifecycle.AndroidViewModel
+import com.example.myapplication.BR
 import com.example.myapplication.data.model.Item
 import com.example.myapplication.data.network.HackerNewsInteractor
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class MainViewModel(private val app: Application,
-                    private val hackerNewsInteractor: HackerNewsInteractor,
-                    protected val disposables: CompositeDisposable = CompositeDisposable()
-)
-    : AndroidViewModel(app), Observable {
-
-    @VisibleForTesting
-    internal var stories: Stories = Stories.Result(emptyList())
-        set(value) {
-            field = value
-
-            when (value) {
-                is Stories.Error -> value.message
-            }
-        }
+class MainViewModel @Inject constructor(private val app: Application,
+                                       private val hackerNewsInteractor: HackerNewsInteractor)
+    : BaseViewModel(app) {
 
     sealed class Stories {
         class Loading : Stories()
@@ -32,26 +23,36 @@ class MainViewModel(private val app: Application,
         class Error(val message: String) : Stories()
     }
 
+    @Bindable
+    fun isLoading(): Boolean = state is Stories.Loading
+
+    @Bindable
+    fun getStories() = state.let {
+        when (it) {
+            is Stories.Result -> it.stories
+            else -> emptyList()
+        }
+    }
+
+    var state : Stories = Stories.Loading()
+        set(value) {
+            field = value
+
+            notifyPropertyChanged(BR.loading)
+            notifyPropertyChanged(BR.stories)
+
+        }
+
     fun fetchTopStories() {
-        stories = Stories.Loading()
+        state = Stories.Loading()
         disposables.add(hackerNewsInteractor.loadStories(HackerNewsInteractor.LoadStoriesRequest())
             .map { it.items }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                { stories = Stories.Result(it) },
-                { stories = Stories.Error(it.message!!) }
+                { state = Stories.Result(it) },
+                { state = Stories.Error(it.message!!) }
             ))
-    }
-
-
-
-    override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 }

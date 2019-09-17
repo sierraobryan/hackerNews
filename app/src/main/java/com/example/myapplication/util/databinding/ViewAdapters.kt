@@ -6,7 +6,13 @@ import androidx.databinding.BindingAdapter
 object ViewAdapters {
     @JvmStatic
     @BindingAdapter("visible")
-    fun setVisible(view: View, string: String) {
-        view.visibility = if (string.isNotBlank()) View.VISIBLE else View.GONE
+    fun setVisible(view: View, visible: Boolean) {
+        view.visibility = if (visible) View.VISIBLE else View.INVISIBLE
+    }
+
+    @JvmStatic
+    @BindingAdapter("showString")
+    fun setVisible(view: View, string: String?) {
+        view.visibility = if (!string.isNullOrEmpty()) View.VISIBLE else View.GONE
     }
 }

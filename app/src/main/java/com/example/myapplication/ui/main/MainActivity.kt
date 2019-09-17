@@ -1,36 +1,26 @@
 package com.example.myapplication.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
+import androidx.databinding.DataBindingUtil
+import com.atomicrobot.marsrover.ui.main.MainActivityBinding
 import com.example.myapplication.R
-import com.example.myapplication.di.ApplicationComponent
-import com.example.myapplication.di.MainApplication
-import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    protected val appComponent: ApplicationComponent
-        get() = (application as MainApplication).component
+class MainActivity : BaseActivity() {
 
     private lateinit var viewModel : MainViewModel
+    private lateinit var binding: MainActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         appComponent.inject(this)
         super.onCreate(savedInstanceState)
 
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
+        viewModel = getViewModel(MainViewModel::class)
 
-        setContentView(R.layout.main_activity)
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.container, MainFragment.newInstance())
-                .commitNow()
-        }
+        binding = DataBindingUtil.setContentView(this, R.layout.main_activity)
+        binding.vm = viewModel
+        binding.executePendingBindings()
+
     }
 
 }

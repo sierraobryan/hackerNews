@@ -31,12 +31,14 @@ class HackerNewsInteractor (
     private fun loadStoriesFromIds(ids: List<Int>): Observable<List<Item>> {
         val allObservables: MutableList<Observable<Item>> = mutableListOf()
         for (i in 1..10) {
-            allObservables.add(i, loadStory(ids[i]))
+            allObservables.add(i - 1, loadStory(ids[i]))
         }
-        return Observable.zip(allObservables,
-             { t: Array<Any> ->
-                listOf<Item>()
-            })
+        return Observable.zip(allObservables)
+             { t ->  convertToListOfItems(t) }
+    }
+
+    private fun convertToListOfItems(array: Array<Any>) : List<Item> {
+        return array.toList() as List<Item>
     }
 
     private fun loadStory(id : Int) : Observable<Item> {
