@@ -60,15 +60,15 @@ class DataModule {
 
     @Singleton
     @Provides
-    fun provideGitHubApiService(retrofit: Retrofit): GitHubApiService {
-        return retrofit.create(GitHubApiService::class.java)
+    fun provideGitHubApiService(retrofit: Retrofit): HackerNewsApiService {
+        return retrofit.create(HackerNewsApiService::class.java)
     }
 
     @Singleton
     @Provides
     fun provideGitHubService(
         context: Context,
-        api: GitHubApiService): GitHubInteractor {
-        return GitHubInteractor(context, api)
+        api: HackerNewsApiService): HackerNewsInteractor {
+        return HackerNewsInteractor(context, api)
     }
 }

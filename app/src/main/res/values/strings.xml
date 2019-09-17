@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="default_base_url">https://hacker-news.firebaseio.com/v0/</string>
+    <string name="error">Something went wrong</string>
 </resources>

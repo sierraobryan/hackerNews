@@ -1,5 +1,6 @@
 package com.example.myapplication.di
 
+import com.example.myapplication.ui.main.MainActivity
 import dagger.Component
 import javax.inject.Singleton
 
@@ -10,6 +11,5 @@ import javax.inject.Singleton
 interface ApplicationComponent {
     fun inject(application: MainApplication)
 
-    //fun inject(activity: MainActivity)
-    // GENERATOR - MORE ACTIVITIES //
+    fun inject(activity: MainActivity)
 }
