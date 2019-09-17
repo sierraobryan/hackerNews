@@ -3,6 +3,7 @@ package com.example.myapplication.ui.main
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.example.myapplication.R
 import com.example.myapplication.di.ApplicationComponent
 import com.example.myapplication.di.MainApplication
@@ -21,6 +22,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         appComponent.inject(this)
         super.onCreate(savedInstanceState)
+
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
+
         setContentView(R.layout.main_activity)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
