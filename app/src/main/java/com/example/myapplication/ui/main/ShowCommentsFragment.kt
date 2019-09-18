@@ -36,7 +36,7 @@ class ShowCommentsFragment : DialogFragment() {
 
 
         binding.comments.layoutManager = LinearLayoutManager(activity)
-        binding.comments.adapter = CommentAdapter(viewModel)
+        binding.comments.adapter = CommentAdapter()
 
         viewModel.fetchComments()
 
@@ -51,25 +51,24 @@ class ShowCommentsFragment : DialogFragment() {
         }
     }
 
-    private class CommentAdapter (val viewModel: MainViewModel) : ArrayAdapter<Item, ItemViewHolder>() {
+    private class CommentAdapter () : ArrayAdapter<Item, ItemViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
             val binding: StoryItemBinding = DataBindingUtil.inflate(layoutInflater, R.layout.item_row_story_summary, parent, false)
-            return ItemViewHolder(binding, viewModel)
+            return ItemViewHolder(binding)
         }
 
         override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
             val story = getItemAtPosition(position)
-            holder.bind(story, position)
+            holder.bind(story)
         }
 
     }
 
-    private class ItemViewHolder(private val binding: StoryItemBinding,
-                                 private val viewModel: MainViewModel): RecyclerView.ViewHolder(binding.root) {
+    private class ItemViewHolder(private val binding: StoryItemBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Item, position: Int) {
+        fun bind(item: Item) {
             binding.item = item
             binding.executePendingBindings()
         }

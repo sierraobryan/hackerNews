@@ -11,8 +11,7 @@ import io.reactivex.disposables.CompositeDisposable
 abstract class BaseViewModel(
     app: Application,
     protected val disposables: CompositeDisposable = CompositeDisposable()
-)
-    : AndroidViewModel(app), Observable {
+) : AndroidViewModel(app), Observable {
 
     override fun onCleared() {
         disposables.dispose()

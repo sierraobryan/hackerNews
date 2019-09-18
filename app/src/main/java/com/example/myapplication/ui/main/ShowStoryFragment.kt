@@ -19,7 +19,6 @@ class ShowStoryFragment : DialogFragment() {
     }
 
     private lateinit var viewModel: MainViewModel
-    private lateinit var item: Item
     private lateinit var binding: ShowStoryFragmentBinding
 
     override fun onCreateView(
