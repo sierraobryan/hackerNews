@@ -17,7 +17,7 @@ abstract class BaseActivity : AppCompatActivity() {
     protected val appComponent: ApplicationComponent
         get() = (application as MainApplication).component
 
-    fun <VM: ViewModel> getViewModel(viewModelClass: KClass<VM>): VM {
+    fun <VM : ViewModel> getViewModel(viewModelClass: KClass<VM>): VM {
         return ViewModelProviders.of(this, viewModelFactory).get(viewModelClass.java)
     }
 }

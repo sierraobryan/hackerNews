@@ -1,7 +1,7 @@
 package com.example.myapplication
 
-import com.example.myapplication.data.model.Item
 import com.example.myapplication.data.DataModule
+import com.example.myapplication.data.model.Item
 import com.example.myapplication.data.network.HackerNewsApiService
 import io.reactivex.observers.TestObserver
 import junit.framework.Assert.*

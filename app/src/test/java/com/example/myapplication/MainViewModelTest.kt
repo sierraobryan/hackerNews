@@ -9,7 +9,6 @@ import com.example.myapplication.ui.main.MainViewModel
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.Observable
-import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
@@ -22,9 +21,12 @@ import org.mockito.MockitoAnnotations
 @RunWith(AndroidJUnit4::class)
 class MainViewModelTest {
 
-    @JvmField @Rule val trampolineSchedulerRule = TrampolineSchedulerRule()
+    @JvmField
+    @Rule
+    val trampolineSchedulerRule = TrampolineSchedulerRule()
 
-    @Mock private lateinit var interactor: HackerNewsInteractor
+    @Mock
+    private lateinit var interactor: HackerNewsInteractor
 
     private lateinit var viewModel: MainViewModel
 
@@ -35,9 +37,11 @@ class MainViewModelTest {
         val app = ApplicationProvider.getApplicationContext<Application>()
         viewModel = MainViewModel(
             app,
-            interactor)
+            interactor
+        )
 
-        viewModel.item = Item(1, false, "story", "name", 1, false, listOf(1), 2, "", "", "", listOf(1), 1, 1)
+        viewModel.item =
+            Item(1, false, "story", "name", 1, false, listOf(1), 2, "", "", "", listOf(1), 1, 1)
     }
 
 

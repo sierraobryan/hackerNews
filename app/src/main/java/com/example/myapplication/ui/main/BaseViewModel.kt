@@ -1,8 +1,6 @@
 package com.example.myapplication.ui.main
 
 import android.app.Application
-import android.os.Bundle
-import android.os.Parcelable
 import androidx.databinding.Observable
 import androidx.databinding.PropertyChangeRegistry
 import androidx.lifecycle.AndroidViewModel
@@ -20,7 +18,8 @@ abstract class BaseViewModel(
 
     /* Start of databinding behavior pillaged from BaseObservable */
 
-    @Transient private var databindingCallbacks: PropertyChangeRegistry? = null
+    @Transient
+    private var databindingCallbacks: PropertyChangeRegistry? = null
 
     override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback) {
         synchronized(this) {

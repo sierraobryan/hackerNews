@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.atomicrobot.marsrover.ui.main.ShowCommentsFragmentBinding
-import com.atomicrobot.marsrover.ui.main.ShowStoryFragmentBinding
 import com.example.myapplication.R
 import com.example.myapplication.StoryItemBinding
 import com.example.myapplication.data.model.Item
@@ -30,7 +29,8 @@ class ShowCommentsFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         viewModel = ViewModelProviders.of(activity!!).get(MainViewModel::class.java)
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_show_comments, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_show_comments, container, false)
 
         binding.vm = viewModel
 
@@ -55,7 +55,12 @@ class ShowCommentsFragment : DialogFragment() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
-            val binding: StoryItemBinding = DataBindingUtil.inflate(layoutInflater, R.layout.item_row_story_summary, parent, false)
+            val binding: StoryItemBinding = DataBindingUtil.inflate(
+                layoutInflater,
+                R.layout.item_row_story_summary,
+                parent,
+                false
+            )
             return ItemViewHolder(binding)
         }
 
@@ -66,7 +71,8 @@ class ShowCommentsFragment : DialogFragment() {
 
     }
 
-    private class ItemViewHolder(private val binding: StoryItemBinding): RecyclerView.ViewHolder(binding.root) {
+    private class ItemViewHolder(private val binding: StoryItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Item) {
             binding.item = item

@@ -1,9 +1,10 @@
 package com.example.myapplication.util.recyclerview
 
 import androidx.recyclerview.widget.RecyclerView
-import java.util.ArrayList
+import java.util.*
 
-abstract class ArrayAdapter<Item, ItemViewHolder : RecyclerView.ViewHolder> : RecyclerView.Adapter<ItemViewHolder>() {
+abstract class ArrayAdapter<Item, ItemViewHolder : RecyclerView.ViewHolder> :
+    RecyclerView.Adapter<ItemViewHolder>() {
 
     private var items: List<Item> = ArrayList()
 

@@ -5,9 +5,9 @@ import android.content.Context
 import androidx.room.Room
 import com.example.myapplication.data.network.HackerNewsApiService
 import com.example.myapplication.data.network.HackerNewsInteractor
-import com.example.myapplication.data.room.ItemStore
 import com.example.myapplication.data.room.DatabaseMigrations
 import com.example.myapplication.data.room.ItemDatabase
+import com.example.myapplication.data.room.ItemStore
 import com.example.myapplication.di.Settings
 import com.squareup.moshi.Moshi
 import dagger.Module
@@ -42,7 +42,7 @@ class DataModule {
     @Singleton
     @Provides
     fun provideBaseUrl(settings: Settings): String {
-      return settings.baseUrl
+        return settings.baseUrl
     }
 
     @Singleton
@@ -57,7 +57,8 @@ class DataModule {
     fun provideRetrofit(
         client: OkHttpClient,
         baseUrl: String,
-        converterFactory: Converter.Factory): Retrofit {
+        converterFactory: Converter.Factory
+    ): Retrofit {
         return Retrofit.Builder()
             .client(client)
             .baseUrl(baseUrl)
@@ -91,10 +92,11 @@ class DataModule {
 
     @Singleton
     @Provides
-    fun provideItemStore(database: ItemDatabase) : ItemStore {
+    fun provideItemStore(database: ItemDatabase): ItemStore {
         return ItemStore(database)
     }
 
     companion object {
         private const val DISK_CACHE_SIZE = 50 * 1024 * 1024 // 50MB
-    }}
+    }
+}

@@ -2,9 +2,10 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data class="com.atomicrobot.marsrover.ui.main.MainActivityBinding">
+
         <variable
             name="vm"
-            type="com.example.myapplication.ui.main.MainViewModel"/>
+            type="com.example.myapplication.ui.main.MainViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -13,7 +14,7 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
-        <include layout="@layout/content_list_stories"/>
+        <include layout="@layout/content_list_stories" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

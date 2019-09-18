@@ -1,23 +1,20 @@
 package com.example.myapplication.ui.main
 
 import android.app.Application
-import android.text.Html
 import androidx.annotation.VisibleForTesting
 import androidx.databinding.Bindable
-import androidx.databinding.Observable
-import androidx.lifecycle.AndroidViewModel
 import com.example.myapplication.BR
 import com.example.myapplication.data.model.Item
 import com.example.myapplication.data.network.HackerNewsInteractor
 import com.example.myapplication.ui.NavigationEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor(app: Application,
-                                       private val hackerNewsInteractor: HackerNewsInteractor)
-    : BaseViewModel(app) {
+class MainViewModel @Inject constructor(
+    app: Application,
+    private val hackerNewsInteractor: HackerNewsInteractor
+) : BaseViewModel(app) {
 
     sealed class Stories {
         class Loading : Stories()
@@ -32,7 +29,7 @@ class MainViewModel @Inject constructor(app: Application,
     }
 
 
-    lateinit var item : Item
+    lateinit var item: Item
 
     @Bindable
     fun isLoading(): Boolean = state is Stories.Loading
@@ -54,7 +51,7 @@ class MainViewModel @Inject constructor(app: Application,
     }
 
     @VisibleForTesting
-    internal var state : Stories = Stories.Loading()
+    internal var state: Stories = Stories.Loading()
         set(value) {
             field = value
 
@@ -63,7 +60,7 @@ class MainViewModel @Inject constructor(app: Application,
 
         }
 
-    var commentState : Comments = Comments.Loading()
+    var commentState: Comments = Comments.Loading()
         set(value) {
             field = value
 
@@ -103,7 +100,7 @@ class MainViewModel @Inject constructor(app: Application,
     }
 
     sealed class StoryNavigation {
-        data class OpenWebPage(val url : String) : StoryNavigation()
+        data class OpenWebPage(val url: String) : StoryNavigation()
         object OpenStory : StoryNavigation()
         object OpenComments : StoryNavigation()
     }
@@ -112,7 +109,8 @@ class MainViewModel @Inject constructor(app: Application,
 
     fun promptMoreInformation(item: Item) {
         this.item = item
-        navigationEvent.value = if (!item.url.isNullOrEmpty()) StoryNavigation.OpenWebPage(item.url) else StoryNavigation.OpenStory
+        navigationEvent.value =
+            if (!item.url.isNullOrEmpty()) StoryNavigation.OpenWebPage(item.url) else StoryNavigation.OpenStory
     }
 
     fun startShowComments(item: Item) {

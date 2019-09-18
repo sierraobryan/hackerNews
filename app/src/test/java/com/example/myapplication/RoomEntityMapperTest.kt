@@ -1,8 +1,8 @@
 package com.example.myapplication
 
 import com.example.myapplication.data.model.Item
-import com.example.myapplication.data.room.RoomEntityMapper
 import com.example.myapplication.data.model.RoomItem
+import com.example.myapplication.data.room.RoomEntityMapper
 import org.junit.Assert
 import org.junit.Test
 
@@ -27,9 +27,11 @@ class RoomEntityMapperTest {
             1,
             1,
             false,
-            false)
+            false
+        )
 
-        val item = Item(1, false, "story", "name", 1, false, listOf(1), 2, "", "", "", listOf(1), 1, 1)
+        val item =
+            Item(1, false, "story", "name", 1, false, listOf(1), 2, "", "", "", listOf(1), 1, 1)
 
         val actual = mapper.itemToRoomItem(item)
         Assert.assertEquals(expected, actual)

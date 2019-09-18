@@ -1,12 +1,12 @@
 package com.example.myapplication.ui.main
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.atomicrobot.marsrover.ui.main.MainFragmentBinding
@@ -42,11 +42,17 @@ class MainFragment : Fragment() {
         return binding.root
     }
 
-    private class StoryAdapter(val viewModel: MainViewModel) : ArrayAdapter<Item, ItemViewHolder>() {
+    private class StoryAdapter(val viewModel: MainViewModel) :
+        ArrayAdapter<Item, ItemViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
-            val binding: StoryItemBinding = DataBindingUtil.inflate(layoutInflater, R.layout.item_row_story_summary, parent, false)
+            val binding: StoryItemBinding = DataBindingUtil.inflate(
+                layoutInflater,
+                R.layout.item_row_story_summary,
+                parent,
+                false
+            )
             return ItemViewHolder(binding, viewModel)
         }
 
@@ -57,8 +63,10 @@ class MainFragment : Fragment() {
 
     }
 
-    private class ItemViewHolder(private val binding: StoryItemBinding,
-                                 private val viewModel: MainViewModel): RecyclerView.ViewHolder(binding.root) {
+    private class ItemViewHolder(
+        private val binding: StoryItemBinding,
+        private val viewModel: MainViewModel
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Item, position: Int) {
             binding.item = item

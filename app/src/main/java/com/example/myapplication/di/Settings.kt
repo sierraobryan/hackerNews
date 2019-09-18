@@ -11,7 +11,11 @@ open class Settings(private val context: Context) {
 
     var baseUrl: String
         get() = preferences.getString(PREF_BASE_URL, context.getString(R.string.default_base_url))!!
-        set(baseUrl) = preferences.putOrClearPreference(PREF_BASE_URL, !TextUtils.isEmpty(baseUrl), baseUrl)
+        set(baseUrl) = preferences.putOrClearPreference(
+            PREF_BASE_URL,
+            !TextUtils.isEmpty(baseUrl),
+            baseUrl
+        )
 
     companion object {
         private const val PREFS_SETTINGS = "settings"  // NON-NLS
