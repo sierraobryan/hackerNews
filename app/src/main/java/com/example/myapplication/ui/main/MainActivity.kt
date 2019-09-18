@@ -12,6 +12,7 @@ import com.example.myapplication.R
 class MainActivity : BaseActivity() {
 
     private final var SHOW_STORY_TAG : String = "showStoryFragment"
+    private final var SHOW_COMMENTS_TAG : String = "showCommentFragment"
 
     private lateinit var viewModel : MainViewModel
     private lateinit var binding: MainActivityBinding
@@ -31,6 +32,7 @@ class MainActivity : BaseActivity() {
                 when (event) {
                     is MainViewModel.StoryNavigation.OpenWebPage -> openWebPage(event.url)
                     MainViewModel.StoryNavigation.OpenStory -> openStory()
+                    MainViewModel.StoryNavigation.OpenComments -> openComments()
                 }
             }
         })
@@ -44,6 +46,10 @@ class MainActivity : BaseActivity() {
 
     private fun openStory() {
         ShowStoryFragment.newInstance().show(supportFragmentManager, SHOW_STORY_TAG)
+    }
+
+    private fun openComments() {
+        ShowCommentsFragment.newInstance().show(supportFragmentManager, SHOW_COMMENTS_TAG)
     }
 
 }

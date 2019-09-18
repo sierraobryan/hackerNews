@@ -6,6 +6,7 @@ import com.example.myapplication.data.model.Item
 import io.reactivex.Observable
 import retrofit2.Response
 import timber.log.Timber
+import kotlin.math.min
 
 
 class HackerNewsInteractor (
@@ -31,10 +32,8 @@ class HackerNewsInteractor (
 
     private fun loadItemsFromIds(ids: List<Int>): Observable<List<Item>> {
         val allObservables: MutableList<Observable<Item>> = mutableListOf()
-        for (i in 1..20) {
-            allObservables.add(i - 1, loadItem(ids[i]))
-        }
-        return Observable.zip(allObservables)
+        ids.forEach { allObservables.add(loadItem(it)) }
+        return Observable.zip(allObservables.take(min(ids.size, 30)))
              { t ->  convertToListOfItems(t) }
     }
 

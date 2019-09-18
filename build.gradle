@@ -26,6 +26,37 @@ allprojects {
     }
 }
 
+ext {
+
+    versions = [
+            // Integrations
+            playServices             : '16.1.0',
+            playServicesCastFramework: '16.1.2',
+            firebase                 : '16.0.8',
+
+            // AndroidX
+            appCompat                : '1.0.2',
+            room                     : '2.0.0',
+            workManager              : '2.0.1',
+            mediaRouter              : '1.0.0',
+            recyclerView             : '1.0.0',
+            exoPlayer                : '2.9.6',
+
+            // Extras
+            dagger                   : '2.20',
+            retrofit                 : '2.4.0',
+            okHttp                   : '3.11.0',
+            leakcanary               : '1.5.4',
+
+            // Testing
+            junit                    : '4.12',
+            mockito                  : '2.25.0',
+            robolectric              : '4.2',
+            androidTestSupport       : '1.1.0',
+            espresso                 : '3.1.1'
+    ]
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
