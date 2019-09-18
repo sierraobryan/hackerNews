@@ -15,7 +15,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor(private val app: Application,
+class MainViewModel @Inject constructor(app: Application,
                                        private val hackerNewsInteractor: HackerNewsInteractor)
     : BaseViewModel(app) {
 

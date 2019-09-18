@@ -17,7 +17,7 @@ class HackerNewsInteractor (
     private val store: ItemStore
 ) {
 
-    class LoadStoriesRequest()
+    class LoadStoriesRequest
     class LoadStoriesResponse(val request: LoadStoriesRequest, val items: List<Item>)
 
     class LoadCommentsRequest(val ids: List<Int>)

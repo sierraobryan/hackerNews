@@ -51,7 +51,7 @@ class ShowCommentsFragment : DialogFragment() {
         }
     }
 
-    private class CommentAdapter () : ArrayAdapter<Item, ItemViewHolder>() {
+    private class CommentAdapter : ArrayAdapter<Item, ItemViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)

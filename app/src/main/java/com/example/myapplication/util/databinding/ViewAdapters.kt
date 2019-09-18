@@ -20,6 +20,6 @@ object ViewAdapters {
     @JvmStatic
     @BindingAdapter("webViewData")
     fun setWebView(view: WebView, string: String?) {
-        view.loadDataWithBaseURL(null, string, "text/html", "utf-8", null);
+        view.loadDataWithBaseURL(null, string, "text/html", "utf-8", null)
     }
 }

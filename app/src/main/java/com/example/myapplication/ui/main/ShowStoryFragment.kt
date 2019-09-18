@@ -9,8 +9,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import com.example.myapplication.R
-import com.example.myapplication.data.model.Item
-import kotlinx.android.synthetic.main.fragment_story_layout.*
 
 class ShowStoryFragment : DialogFragment() {
 

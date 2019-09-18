@@ -21,10 +21,6 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.io.File
 import javax.inject.Singleton
 
-interface OkHttpSecurityModifier {
-    fun apply(builder: OkHttpClient.Builder)
-}
-
 @Module
 class DataModule {
 
