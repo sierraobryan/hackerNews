@@ -42,20 +42,57 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/author"
-                    style="@style/TextAppearance.AppCompat.Caption"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="@{item.authorName}"
-                    app:showString='@{item.authorName}'
-                    tools:text="Author name"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/author"
+                        style="@style/TextAppearance.AppCompat.Caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="@{item.authorName}"
+                        app:showString='@{item.authorName}'
+                        tools:text="Author name"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/spacer"
+                        style="@style/TextAppearance.AppCompat.Caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/spacer"
+                        app:showString='@{item.getElapsedTime()}'
+                        tools:text="\u2022"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/date"
+                        style="@style/TextAppearance.AppCompat.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="@{item.getElapsedTime()}"
+                        app:showString='@{item.getElapsedTime()}'
+                        tools:text="date"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </LinearLayout>
+
+
 
                 <TextView
                     android:id="@+id/title"
@@ -79,6 +116,7 @@
                     android:layout_marginBottom="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginStart="16dp"
+                    android:textColor="@color/colorPrimaryDark"
                     android:text='@{item.url}'
                     app:showString='@{item.url}'
                     tools:text="url"

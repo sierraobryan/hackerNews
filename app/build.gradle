@@ -113,6 +113,9 @@ dependencies {
     implementation 'com.squareup.moshi:moshi:1.6.0'
     kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.6.0'
 
+    // Time Monitoring
+    implementation 'joda-time:joda-time:2.9.9'
+
     // Networking - REST
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:adapter-rxjava2:2.4.0"
