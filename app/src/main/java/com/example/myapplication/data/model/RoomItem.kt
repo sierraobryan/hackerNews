@@ -18,5 +18,7 @@ data class RoomItem(
     @ColumnInfo(name = "url") val url: String?,
     @ColumnInfo(name = "title") val title: String?,
     @ColumnInfo(name = "score") val score : Int?,
-    @ColumnInfo(name = "descendants") val descendants: Int = 0
+    @ColumnInfo(name = "descendants") val descendants: Int = 0,
+    @ColumnInfo(name = "favorite") val isFavorite : Boolean = false,
+    @ColumnInfo(name = "viewed") val viewed : Boolean = false
 )

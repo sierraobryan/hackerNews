@@ -3,6 +3,7 @@ package com.example.myapplication.data.network
 import android.content.Context
 import com.example.myapplication.R
 import com.example.myapplication.data.model.Item
+import com.example.myapplication.data.model.ItemStore
 import io.reactivex.Observable
 import retrofit2.Response
 import timber.log.Timber
@@ -11,7 +12,8 @@ import kotlin.math.min
 
 class HackerNewsInteractor (
     private val context: Context,
-    private val service: HackerNewsApiService
+    private val service: HackerNewsApiService,
+    private val store: ItemStore
 ) {
 
     class LoadStoriesRequest()
@@ -26,7 +28,9 @@ class HackerNewsInteractor (
             .map { response -> checkResponse(response, context.getString(R.string.error)) }
             .map { response -> response.body() ?: emptyList() }
             .flatMap { ids -> loadItemsFromIds(ids) }
-            .map { stories -> LoadStoriesResponse(request, stories) }
+            .map { stories ->
+                store.insertItems(stories)
+                LoadStoriesResponse(request, stories) }
             .doOnError { error -> Timber.e(error) }
     }
 
@@ -37,6 +41,7 @@ class HackerNewsInteractor (
              { t ->  convertToListOfItems(t) }
     }
 
+    @Suppress("UNCHECKED_CAST")
     private fun convertToListOfItems(array: Array<Any>) : List<Item> {
         return array.toList() as List<Item>
     }
@@ -49,7 +54,9 @@ class HackerNewsInteractor (
 
     fun loadComments(request: LoadCommentsRequest): Observable<LoadCommentsResponse> {
         return loadItemsFromIds(request.ids)
-            .map { comments -> LoadCommentsResponse(request, comments) }
+            .map { comments ->
+                store.insertItems(comments)
+                LoadCommentsResponse(request, comments) }
             .doOnError { error -> Timber.e(error) }
     }
 

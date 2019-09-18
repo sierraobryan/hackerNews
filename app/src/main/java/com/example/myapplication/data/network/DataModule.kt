@@ -2,6 +2,10 @@ package com.example.myapplication.data.network
 
 import android.app.Application
 import android.content.Context
+import androidx.room.Room
+import com.example.myapplication.data.model.ItemStore
+import com.example.myapplication.data.room.DatabaseMigrations
+import com.example.myapplication.data.room.ItemDatabase
 import com.example.myapplication.di.Settings
 import com.squareup.moshi.Moshi
 import dagger.Module
@@ -66,16 +70,30 @@ class DataModule {
 
     @Singleton
     @Provides
-    fun provideGitHubApiService(retrofit: Retrofit): HackerNewsApiService {
+    fun provideHackerNewsApiService(retrofit: Retrofit): HackerNewsApiService {
         return retrofit.create(HackerNewsApiService::class.java)
     }
 
     @Singleton
     @Provides
-    fun provideGitHubService(
+    fun provideHackerNewsService(
         context: Context,
-        api: HackerNewsApiService): HackerNewsInteractor {
-        return HackerNewsInteractor(context, api)
+        api: HackerNewsApiService,
+        itemStore: ItemStore): HackerNewsInteractor {
+        return HackerNewsInteractor(context, api, itemStore)
+    }
+
+    @Singleton
+    @Provides
+    fun provideItemDatabase(context: Context) =
+        Room.databaseBuilder(context, ItemDatabase::class.java, "Items")
+            .apply { DatabaseMigrations.migrations.forEach { addMigrations(it) } }
+            .build()
+
+    @Singleton
+    @Provides
+    fun provideItemStore(database: ItemDatabase) : ItemStore {
+        return ItemStore(database)
     }
 
     companion object {
