@@ -5,11 +5,13 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import com.example.myapplication.data.model.RoomItem
 
-@Database(entities = [RoomItem::class],
+@Database(
+    entities = [RoomItem::class],
     version = 1,
-    exportSchema = false)
+    exportSchema = false
+)
 abstract class ItemDatabase : RoomDatabase() {
-    abstract fun itemDao() : ItemDao
+    abstract fun itemDao(): ItemDao
 }
 
 object DatabaseMigrations {

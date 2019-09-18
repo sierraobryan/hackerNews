@@ -7,12 +7,12 @@ import io.reactivex.Completable
 import io.reactivex.schedulers.Schedulers
 
 @Mockable
-class ItemStore (
+class ItemStore(
     private val database: ItemDatabase,
     private val itemDao: ItemDao = database.itemDao()
 ) {
 
-    fun insertItems(items: List<Item>) :Completable {
+    fun insertItems(items: List<Item>): Completable {
         return Completable.fromCallable {
             val roomItems = items.map {
                 RoomEntityMapper.itemToRoomItem(

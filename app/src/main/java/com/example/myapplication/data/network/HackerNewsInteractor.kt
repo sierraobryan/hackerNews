@@ -11,7 +11,7 @@ import timber.log.Timber
 import kotlin.math.min
 
 @Mockable
-class HackerNewsInteractor (
+class HackerNewsInteractor(
     private val context: Context,
     private val service: HackerNewsApiService,
     private val store: ItemStore
@@ -31,7 +31,8 @@ class HackerNewsInteractor (
             .flatMap { ids -> loadItemsFromIds(ids) }
             .map { stories ->
                 store.insertItems(stories)
-                LoadStoriesResponse(request, stories) }
+                LoadStoriesResponse(request, stories)
+            }
             .doOnError { error -> Timber.e(error) }
     }
 
@@ -39,15 +40,15 @@ class HackerNewsInteractor (
         val allObservables: MutableList<Observable<Item>> = mutableListOf()
         ids.forEach { allObservables.add(loadItem(it)) }
         return Observable.zip(allObservables.take(min(ids.size, 30)))
-             { t ->  convertToListOfItems(t) }
+        { t -> convertToListOfItems(t) }
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun convertToListOfItems(array: Array<Any>) : List<Item> {
+    private fun convertToListOfItems(array: Array<Any>): List<Item> {
         return array.toList() as List<Item>
     }
 
-    private fun loadItem(id : Int) : Observable<Item> {
+    private fun loadItem(id: Int): Observable<Item> {
         return service.getItem(id).toObservable()
             .map { response -> checkResponse(response, context.getString(R.string.error)) }
             .map { response -> response.body() }
@@ -57,7 +58,8 @@ class HackerNewsInteractor (
         return loadItemsFromIds(request.ids)
             .map { comments ->
                 store.insertItems(comments)
-                LoadCommentsResponse(request, comments) }
+                LoadCommentsResponse(request, comments)
+            }
             .doOnError { error -> Timber.e(error) }
     }
 
