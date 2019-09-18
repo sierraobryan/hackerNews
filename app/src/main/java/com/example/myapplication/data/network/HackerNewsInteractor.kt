@@ -6,8 +6,6 @@ import com.example.myapplication.data.model.Item
 import io.reactivex.Observable
 import retrofit2.Response
 import timber.log.Timber
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import io.reactivex.functions.Function
 
 
 class HackerNewsInteractor (
@@ -18,20 +16,23 @@ class HackerNewsInteractor (
     class LoadStoriesRequest()
     class LoadStoriesResponse(val request: LoadStoriesRequest, val items: List<Item>)
 
+    class LoadCommentsRequest(val ids: List<Int>)
+    class LoadCommentsResponse(val request: LoadCommentsRequest, val items: List<Item>)
+
     fun loadStories(request: LoadStoriesRequest): Observable<LoadStoriesResponse> {
         return service.getTopStories()
             .toObservable()
             .map { response -> checkResponse(response, context.getString(R.string.error)) }
             .map { response -> response.body() ?: emptyList() }
-            .flatMap { ids -> loadStoriesFromIds(ids) }
+            .flatMap { ids -> loadItemsFromIds(ids) }
             .map { stories -> LoadStoriesResponse(request, stories) }
             .doOnError { error -> Timber.e(error) }
     }
 
-    private fun loadStoriesFromIds(ids: List<Int>): Observable<List<Item>> {
+    private fun loadItemsFromIds(ids: List<Int>): Observable<List<Item>> {
         val allObservables: MutableList<Observable<Item>> = mutableListOf()
-        for (i in 1..10) {
-            allObservables.add(i - 1, loadStory(ids[i]))
+        for (i in 1..20) {
+            allObservables.add(i - 1, loadItem(ids[i]))
         }
         return Observable.zip(allObservables)
              { t ->  convertToListOfItems(t) }
@@ -41,10 +42,16 @@ class HackerNewsInteractor (
         return array.toList() as List<Item>
     }
 
-    private fun loadStory(id : Int) : Observable<Item> {
+    private fun loadItem(id : Int) : Observable<Item> {
         return service.getItem(id).toObservable()
             .map { response -> checkResponse(response, context.getString(R.string.error)) }
             .map { response -> response.body() }
+    }
+
+    fun loadComments(request: LoadCommentsRequest): Observable<LoadCommentsResponse> {
+        return loadItemsFromIds(request.ids)
+            .map { comments -> LoadCommentsResponse(request, comments) }
+            .doOnError { error -> Timber.e(error) }
     }
 
 

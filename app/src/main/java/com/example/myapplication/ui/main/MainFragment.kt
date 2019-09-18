@@ -35,45 +35,35 @@ class MainFragment : Fragment() {
 
 
         binding.commits.layoutManager = LinearLayoutManager(activity)
-        binding.commits.adapter = StoryAdapter()
+        binding.commits.adapter = StoryAdapter(viewModel)
 
         viewModel.fetchTopStories()
 
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-//        viewModel = ViewModelProviders.of(activity!!).get(MainViewModel::class.java)
-//
-//        binding.vm = viewModel
-//
-//
-//        binding.commits.layoutManager = LinearLayoutManager(activity)
-//        binding.commits.adapter = StoryAdapter()
-//
-//        viewModel.fetchTopStories()
-    }
-
-    private class StoryAdapter : ArrayAdapter<Item, ItemViewHolder>() {
+    private class StoryAdapter(val viewModel: MainViewModel) : ArrayAdapter<Item, ItemViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
             val binding: StoryItemBinding = DataBindingUtil.inflate(layoutInflater, R.layout.item_row_story_summary, parent, false)
-            return ItemViewHolder(binding)
+            return ItemViewHolder(binding, viewModel)
         }
 
         override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
             val story = getItemAtPosition(position)
-            holder.bind(story)
+            holder.bind(story, position)
         }
 
     }
 
-    private class ItemViewHolder(private val binding: StoryItemBinding): RecyclerView.ViewHolder(binding.root) {
+    private class ItemViewHolder(private val binding: StoryItemBinding,
+                                 private val viewModel: MainViewModel): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Item) {
+        fun bind(item: Item, position: Int) {
             binding.item = item
+            binding.position = position
+            binding.vm = viewModel
             binding.executePendingBindings()
         }
     }
