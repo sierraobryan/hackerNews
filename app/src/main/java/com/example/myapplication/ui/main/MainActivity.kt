@@ -11,9 +11,6 @@ import com.example.myapplication.R
 
 class MainActivity : BaseActivity() {
 
-    private final var SHOW_STORY_TAG : String = "showStoryFragment"
-    private final var SHOW_COMMENTS_TAG : String = "showCommentFragment"
-
     private lateinit var viewModel : MainViewModel
     private lateinit var binding: MainActivityBinding
 
@@ -52,4 +49,8 @@ class MainActivity : BaseActivity() {
         ShowCommentsFragment.newInstance().show(supportFragmentManager, SHOW_COMMENTS_TAG)
     }
 
+    companion object {
+        private const val SHOW_STORY_TAG : String = "showStoryFragment"
+        private const val SHOW_COMMENTS_TAG : String = "showCommentFragment"
+    }
 }

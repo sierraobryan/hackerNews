@@ -1,8 +1,10 @@
-package com.example.myapplication.data.network
+package com.example.myapplication.data
 
 import android.app.Application
 import android.content.Context
 import androidx.room.Room
+import com.example.myapplication.data.network.HackerNewsApiService
+import com.example.myapplication.data.network.HackerNewsInteractor
 import com.example.myapplication.data.room.ItemStore
 import com.example.myapplication.data.room.DatabaseMigrations
 import com.example.myapplication.data.room.ItemDatabase

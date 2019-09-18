@@ -1,6 +1,7 @@
 package com.example.myapplication.data.model
 
 import android.os.Parcelable
+import android.text.Html
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.Parcelize
@@ -21,4 +22,5 @@ data class Item (
     @Json(name = "parts") val parts: List<Int>?,
     @Json(name = "score") val score : Int?,
     @Json(name = "descendants") val descendants: Int = 0
-    )
+    ) {
+}

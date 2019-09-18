@@ -2,7 +2,7 @@ package com.example.myapplication.data.network
 
 import android.content.Context
 import com.example.myapplication.Mockable
-//import com.example.myapplication.R
+import com.example.myapplication.R
 import com.example.myapplication.data.model.Item
 import com.example.myapplication.data.room.ItemStore
 import io.reactivex.Observable
@@ -26,7 +26,7 @@ class HackerNewsInteractor (
     fun loadStories(request: LoadStoriesRequest): Observable<LoadStoriesResponse> {
         return service.getTopStories()
             .toObservable()
-            .map { response -> checkResponse(response, "") }
+            .map { response -> checkResponse(response, context.getString(R.string.error)) }
             .map { response -> response.body() ?: emptyList() }
             .flatMap { ids -> loadItemsFromIds(ids) }
             .map { stories ->
@@ -49,7 +49,7 @@ class HackerNewsInteractor (
 
     private fun loadItem(id : Int) : Observable<Item> {
         return service.getItem(id).toObservable()
-            .map { response -> checkResponse(response, "") }
+            .map { response -> checkResponse(response, context.getString(R.string.error)) }
             .map { response -> response.body() }
     }
 
