@@ -53,7 +53,8 @@ class MainViewModel @Inject constructor(private val app: Application,
         }
     }
 
-    var state : Stories = Stories.Loading()
+    @VisibleForTesting
+    internal var state : Stories = Stories.Loading()
         set(value) {
             field = value
 

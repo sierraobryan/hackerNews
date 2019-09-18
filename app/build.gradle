@@ -110,6 +110,28 @@ dependencies {
 
     // Monitoring - Timber (logging)
     implementation 'com.jakewharton.timber:timber:4.7.0'
+
+    // Unit test
+    testImplementation 'junit:junit:4.12'
+    testImplementation "androidx.test:rules:$androidTestSupportVersion"
+    testImplementation "androidx.test:core:$androidTestSupportVersion"
+    testImplementation "androidx.test.ext:junit:$androidTestSupportVersion"
+    testImplementation 'org.robolectric:robolectric:4.2'
+    testImplementation "org.mockito:mockito-core:$mockitoVersion"
+    testImplementation "com.nhaarman:mockito-kotlin-kt1.1:1.5.0"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
+
+
+    // Android JUnit Runner, JUnit Rules, and Espresso
+    androidTestImplementation "androidx.test:runner:$androidTestSupportVersion"
+    androidTestImplementation "androidx.test:rules:$androidTestSupportVersion"
+    androidTestImplementation "androidx.test:core:$androidTestSupportVersion"
+    androidTestImplementation "androidx.test.ext:junit:$androidTestSupportVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
+
+    androidTestImplementation "org.mockito:mockito-android:$mockitoVersion"
+    androidTestImplementation "com.nhaarman:mockito-kotlin-kt1.1:1.5.0"
 }
 
 allOpen {

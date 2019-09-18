@@ -22,6 +22,8 @@ import org.mockito.MockitoAnnotations
 @RunWith(AndroidJUnit4::class)
 class MainViewModelTest {
 
+    @JvmField @Rule val trampolineSchedulerRule = TrampolineSchedulerRule()
+
     @Mock private lateinit var interactor: HackerNewsInteractor
 
     private lateinit var viewModel: MainViewModel
@@ -44,7 +46,7 @@ class MainViewModelTest {
         whenever(mockResult.items).thenReturn(listOf(mockItem))
         whenever(interactor.loadStories(any())).thenReturn(Observable.just(mockResult))
 
-        assertTrue((viewModel.state as? MainViewModel.Stories.Result)?.stories?.isEmpty() ?: false)
+        assertTrue((viewModel.state as? MainViewModel.Stories.Result) == null)
         viewModel.fetchTopStories()
         assertTrue((viewModel.state as? MainViewModel.Stories.Result)?.stories?.size == 1)
     }

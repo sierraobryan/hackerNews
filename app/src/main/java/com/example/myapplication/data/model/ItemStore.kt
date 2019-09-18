@@ -1,5 +1,6 @@
 package com.example.myapplication.data.model
 
+import com.example.myapplication.Mockable
 import com.example.myapplication.data.room.ItemDao
 import com.example.myapplication.data.room.ItemDatabase
 import dagger.Provides
@@ -7,7 +8,7 @@ import io.reactivex.Completable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-
+@Mockable
 class ItemStore (
     private val database: ItemDatabase,
     private val itemDao: ItemDao = database.itemDao()

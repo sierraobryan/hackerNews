@@ -41,7 +41,7 @@ class HackerNewsIneractorTest {
 
     @Test
     @Throws(Exception::class)
-    fun testLoadCommits() {
+    fun testLoadStories() {
 //        val mockResponse = Single.just(Response.success(
 ////            listOf(
 ////            Item(1, false, "story", "name", 1, false, listOf(), 2, "", "", "", listOf(), 1, 1))
