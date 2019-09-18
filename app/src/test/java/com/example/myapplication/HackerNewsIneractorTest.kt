@@ -3,8 +3,7 @@ package com.example.myapplication
 import android.app.Application
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.myapplication.data.model.Item
-import com.example.myapplication.data.model.ItemStore
+import com.example.myapplication.data.room.ItemStore
 import com.example.myapplication.data.network.HackerNewsApiService
 import com.example.myapplication.data.network.HackerNewsInteractor
 import com.nhaarman.mockito_kotlin.whenever
@@ -17,7 +16,6 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import retrofit2.Response
-import java.util.Arrays.asList
 import java.util.concurrent.TimeUnit
 
 @RunWith(AndroidJUnit4::class)

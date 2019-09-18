@@ -36,6 +36,8 @@ class MainViewModelTest {
         viewModel = MainViewModel(
             app,
             interactor)
+
+        viewModel.item = Item(1, false, "story", "name", 1, false, listOf(1), 2, "", "", "", listOf(1), 1, 1)
     }
 
 
@@ -49,5 +51,17 @@ class MainViewModelTest {
         assertTrue((viewModel.state as? MainViewModel.Stories.Result) == null)
         viewModel.fetchTopStories()
         assertTrue((viewModel.state as? MainViewModel.Stories.Result)?.stories?.size == 1)
+    }
+
+    @Test
+    fun testFetchComments() {
+        val mockResult = mock(HackerNewsInteractor.LoadCommentsResponse::class.java)
+        val mockItem = mock(Item::class.java)
+        whenever(mockResult.items).thenReturn(listOf(mockItem))
+        whenever(interactor.loadComments(any())).thenReturn(Observable.just(mockResult))
+
+        assertTrue((viewModel.commentState as? MainViewModel.Comments.Result) == null)
+        viewModel.fetchComments()
+        assertTrue((viewModel.commentState as? MainViewModel.Comments.Result)?.comments?.size == 1)
     }
 }

@@ -4,7 +4,7 @@ import android.content.Context
 import com.example.myapplication.Mockable
 import com.example.myapplication.R
 import com.example.myapplication.data.model.Item
-import com.example.myapplication.data.model.ItemStore
+import com.example.myapplication.data.room.ItemStore
 import io.reactivex.Observable
 import retrofit2.Response
 import timber.log.Timber

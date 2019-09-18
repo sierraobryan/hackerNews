@@ -3,7 +3,7 @@ package com.example.myapplication.data.network
 import android.app.Application
 import android.content.Context
 import androidx.room.Room
-import com.example.myapplication.data.model.ItemStore
+import com.example.myapplication.data.room.ItemStore
 import com.example.myapplication.data.room.DatabaseMigrations
 import com.example.myapplication.data.room.ItemDatabase
 import com.example.myapplication.di.Settings
@@ -79,7 +79,8 @@ class DataModule {
     fun provideHackerNewsService(
         context: Context,
         api: HackerNewsApiService,
-        itemStore: ItemStore): HackerNewsInteractor {
+        itemStore: ItemStore
+    ): HackerNewsInteractor {
         return HackerNewsInteractor(context, api, itemStore)
     }
 
