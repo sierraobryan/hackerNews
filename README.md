@@ -10,4 +10,6 @@ TO DO
 - Dynamic ToolBar (matter more if there was a bottom nav)
 - Webviews because all the text is html ): 
 - you can have comments on comments 
+- Add a refresh button 
+- Add user profile information 
 
