@@ -158,7 +158,8 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginBottom="8dp"
-                    android:src="@drawable/ic_chat_bubble_outline_black_24dp" />
+                    android:src="@drawable/ic_chat_bubble_outline_black_24dp"
+                    app:showList="@{item.descendants}"/>
 
                 <TextView
                     android:id="@+id/numberOfComments"
@@ -167,6 +168,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:layout_marginStart="8dp"
+                    app:showList="@{item.descendants}"
                     android:text='@{item.descendants + ""}'
                     tools:text="8" />
 

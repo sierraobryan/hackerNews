@@ -18,6 +18,12 @@ object ViewAdapters {
     }
 
     @JvmStatic
+    @BindingAdapter("showList")
+    fun setVisible(view: View, numberOfItems : Int) {
+        view.visibility = if (numberOfItems > 0) View.VISIBLE else View.GONE
+    }
+
+    @JvmStatic
     @BindingAdapter("webViewData")
     fun setWebView(view: WebView, string: String?) {
         view.loadDataWithBaseURL(null, string, "text/html", "utf-8", null)

@@ -1,6 +1,7 @@
 package com.example.myapplication.ui.main
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,8 +15,10 @@ import com.example.myapplication.R
 import com.example.myapplication.StoryItemBinding
 import com.example.myapplication.data.model.Item
 import com.example.myapplication.util.recyclerview.ArrayAdapter
+import android.view.Display
+import android.graphics.Point
 
-class ShowCommentsFragment : DialogFragment() {
+class ShowCommentsFragment : BaseDialog() {
 
     companion object {
         fun newInstance() = ShowCommentsFragment()
@@ -23,6 +26,7 @@ class ShowCommentsFragment : DialogFragment() {
 
     private lateinit var viewModel: MainViewModel
     private lateinit var binding: ShowCommentsFragmentBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,13 +47,6 @@ class ShowCommentsFragment : DialogFragment() {
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
-        dialog?.window?.attributes = dialog?.window?.attributes?.apply {
-            width = resources.getDimension(R.dimen.dialog_width).toInt()
-            height = resources.getDimension(R.dimen.dialog_height).toInt()
-        }
-    }
 
     private class CommentAdapter : ArrayAdapter<Item, ItemViewHolder>() {
 

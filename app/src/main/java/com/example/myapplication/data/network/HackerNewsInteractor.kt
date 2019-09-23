@@ -39,7 +39,7 @@ class HackerNewsInteractor(
     private fun loadItemsFromIds(ids: List<Int>): Observable<List<Item>> {
         val allObservables: MutableList<Observable<Item>> = mutableListOf()
         ids.forEach { allObservables.add(loadItem(it)) }
-        return Observable.zip(allObservables.take(min(ids.size, 30)))
+        return Observable.zip(allObservables.take(min(ids.size, 50)))
         { t -> convertToListOfItems(t) }
     }
 
