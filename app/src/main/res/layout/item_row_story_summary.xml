@@ -143,33 +143,65 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/comment_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:gravity="start"
                 android:onClick="@{view -> vm.startShowComments(item)}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/information">
 
+            <ImageView
+                android:id="@+id/chat_bubble"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/ic_chat_bubble_outline_black_24dp"
+                app:showList="@{item.descendants}"/>
+
+            <TextView
+                android:id="@+id/numberOfComments"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="8dp"
+                app:showList="@{item.descendants}"
+                android:text='@{item.descendants + ""}'
+                tools:text="8" />
+
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="start"
+                android:onClick="@{view -> vm.startShowComments(item)}"
+                app:layout_constraintStart_toEndOf="@id/comment_layout"
+                app:layout_constraintTop_toBottomOf="@id/information">
+
                 <ImageView
-                    android:id="@+id/chat_bubble"
+                    android:id="@+id/star"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginBottom="8dp"
-                    android:src="@drawable/ic_chat_bubble_outline_black_24dp"
-                    app:showList="@{item.descendants}"/>
+                    android:src="@drawable/ic_star_border_black_24dp"
+                    app:showList="@{item.score}"/>
 
                 <TextView
-                    android:id="@+id/numberOfComments"
+                    android:id="@+id/score"
                     style="@style/TextAppearance.AppCompat.Body1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:layout_marginStart="8dp"
-                    app:showList="@{item.descendants}"
-                    android:text='@{item.descendants + ""}'
+                    app:showList="@{item.score}"
+                    android:text='@{item.score + ""}'
                     tools:text="8" />
 
             </LinearLayout>
